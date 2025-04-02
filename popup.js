@@ -33,6 +33,10 @@ class DownloadManager {
     this.latestVersionSpan = document.getElementById('latestVersion');
     this.releaseNotesElem = document.getElementById('releaseNotes');
     this.updateBtn = document.getElementById('updateBtn');
+
+    // 获取并显示当前版本号
+    const manifest = chrome.runtime.getManifest();
+    document.querySelector('.download-title span span').textContent = `V${manifest.version}`;
   }
 
   bindEvents() {
@@ -114,7 +118,7 @@ class DownloadManager {
       const filteredData = data.column.filter(item => item.id !== '总数量');
       if (filteredData.length === 0) break;
 
-      if (this.isDuplicatePage(filteredData, lastPageData)) {
+      if (this.isDuplicatePage(filteredData, lastPageData, page)) {
         return this.handleDuplicateData(allData, header, page);
       }
 
@@ -136,22 +140,18 @@ class DownloadManager {
     return data?.column?.length > 0 && data.column.some(item => item.id !== '总数量');
   }
 
-  isDuplicatePage(currentData, lastData) {
-    return lastData && currentData.some((item, index) =>
-      JSON.stringify(item) !== JSON.stringify(lastData[index])
-    ) === false;
+  isDuplicatePage(currentData, lastData, page) {
+    if (!lastData) return false;
+    if (page === 2) return false;
+    return currentData.some((item, index) =>
+      JSON.stringify(item) === JSON.stringify(lastData[index])
+    );
   }
 
   handleDuplicateData(data, header, page) {
-    const validData = data.slice(0, data.length - (page === 2 ? data.length : lastPageData.length));
-
-    throw {
-      type: 'duplicate',
-      message: `检测到第${page}页数据重复`,
-      validData,
-      header,
-      dataCount: validData.length
-    };
+    const lastPageLength = page === 2 ? data.length : data.length / (page - 1);
+    const validData = data.slice(0, data.length - lastPageLength);
+    return this.generateAndDownloadCSV(header, validData);
   }
 
   finalizeDownload(header, data) {
@@ -199,7 +199,8 @@ class DownloadManager {
   }
 
   generateCSVContent(header, allData) {
-    const escapeCSV = str => `"${String(str).replace(/"/g, '""')}"`;
+    const removeHtmlTags = str => String(str).replace(/<[^>]*>/g, '');
+    const escapeCSV = str => `"${removeHtmlTags(String(str)).replace(/"/g, '""')}"`;
     const headers = header.map(h => escapeCSV(h.title || h.key));
     const rows = allData.map(item =>
       header.map(h => typeof item[h.key] === 'number'
@@ -274,4 +275,8 @@ class DownloadManager {
 
 document.addEventListener('DOMContentLoaded', () => {
   new DownloadManager();
+});
+
+document.getElementById('cancelUpdateBtn').addEventListener('click', function() {
+  document.getElementById('updateNotification').style.display = 'none';
 });
