@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "映客活动小助手",
   "description": "支持公司内部批量数据下载，数据格式为CSV",
-  "version": "2.0.1",
+  "version": "2.0.0",
   "author": "杜振训",
   "permissions": ["downloads", "clipboardRead", "alarms"],
   "host_permissions": ["https://api.github.com/*"],
