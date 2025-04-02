@@ -4,7 +4,7 @@
   "description": "支持公司内部批量数据下载，数据格式为CSV",
   "version": "2.0.1",
   "author": "杜振训",
-  "permissions": ["downloads", "clipboardRead", "alarms"],
+  "permissions": ["downloads", "clipboardRead"],
   "host_permissions": ["https://api.github.com/*"],
   "background": {
     "service_worker": "background.js"
