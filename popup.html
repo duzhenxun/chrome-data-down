@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <h1 class="download-title" style="display: flex; align-items: center; justify-content: center; text-align: center;"><span><img src="images/logo.png" alt="icon" width="26" height="26" style="vertical-align: middle;"> </span> 映客活动小助手V1.0<span></span></h1>
+    <div id="updateNotification" style="display: none;" class="update-notification">
+      <div class="update-content">
+        <h3>发现新版本！</h3>
+        <p>当前版本: <span id="currentVersion"></span></p>
+        <p>最新版本: <span id="latestVersion"></span></p>
+        <div class="update-notes">
+          <h4>更新说明:</h4>
+          <p id="releaseNotes"></p>
+        </div>
+        <button id="updateBtn" class="update-btn">立即更新</button>
+      </div>
+    </div>
+    <div class="input-group">
+      <textarea id="urlInput" placeholder="输入数据URL"></textarea>
+      <div class="buttons-container">
+        <button id="pasteBtn" class="paste-btn" title="粘贴"></button>
+        <button id="clearBtn" class="clear-btn" title="清空"></button>
+      </div>
+    </div>
+  
+    
+    <button id="downloadBtn" class="download-btn">下载数据</button>
+    <div id="progressContainer" style="display: none;">
+      <div class="progress-text">当前页数: <span id="currentPage">0</span></div>
+      
+      <div class="progress-text">已下载数据: <span id="downloadedCount">0</span></div>
+      <div class="progress-bar">
+        <div id="progressBar" class="progress-fill"></div>
+      </div>
+    </div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
