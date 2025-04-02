@@ -1,6 +1,6 @@
 // 版本检查配置
 const GITHUB_OWNER = 'duzhenxun';
-const GITHUB_REPO = 'chrome-mysql2struct';
+const GITHUB_REPO = 'chrome-data-down';
 const VERSION_CHECK_URL = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/releases/latest`;
 const UPDATE_URL = `https://github.com/${GITHUB_OWNER}/${GITHUB_REPO}/releases/latest`;
 
