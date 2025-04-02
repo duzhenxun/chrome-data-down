@@ -12,7 +12,24 @@ async function checkForUpdates() {
     const latestVersion = data.tag_name.replace('v', '');
     const currentVersion = chrome.runtime.getManifest().version;
 
-    if (latestVersion > currentVersion) {
+    // 将版本号拆分为数字数组进行比较
+    const latestParts = latestVersion.split('.').map(Number);
+    const currentParts = currentVersion.split('.').map(Number);
+
+    // 比较版本号的每个部分
+    let hasUpdate = false;
+    for (let i = 0; i < Math.max(latestParts.length, currentParts.length); i++) {
+      const latest = latestParts[i] || 0;
+      const current = currentParts[i] || 0;
+      if (latest > current) {
+        hasUpdate = true;
+        break;
+      } else if (latest < current) {
+        break;
+      }
+    }
+
+    if (hasUpdate) {
       // 更新扩展图标
       chrome.action.setBadgeText({ text: '↑' });
       chrome.action.setBadgeBackgroundColor({ color: '#FFCC00' });

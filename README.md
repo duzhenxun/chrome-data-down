@@ -1,4 +1,4 @@
-# 映客活动小助手 
+# 活动小助手 
 
 ## 介绍
 
@@ -8,7 +8,7 @@
 
 ### 方式一：从 Chrome 应用商店安装（推荐）
 
-1. 访问 [Chrome 网上应用商店 - 映客活动小助手](https://chromewebstore.google.com/detail/ofaoogeogpnfabjpocknpbppfobhdnnm?utm_source=item-share-cb)
+1. 访问 [Chrome 网上应用商店 - 活动小助手](https://chromewebstore.google.com/detail/ofaoogeogpnfabjpocknpbppfobhdnnm?utm_source=item-share-cb)
 2. 点击「添加至 Chrome」按钮
 3. 在弹出的确认对话框中点击「添加扩展程序」
 4. 安装完成后，图标将出现在浏览器工具栏中
